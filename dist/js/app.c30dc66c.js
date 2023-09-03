@@ -1,0 +1,1 @@
+!function(){"use strict";var e={a:1},t=document.querySelector("#root"),n=document.createElement("div");n.className="ele--2xwMt",n.innerHTML="测试css module"+(null==e?void 0:e.a)||0,t.appendChild(n)}();
