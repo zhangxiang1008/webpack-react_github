@@ -24,3 +24,6 @@
 1. ``clean-webpack-plugin``,用于打包时清除上次打包的结果，防止文件残留
 2. ``splitChunks`` webpack5.0已经默认开启代码分割，但是对第三方代码，想打包成单独的chunk，需要显式配置。
 3. ``minimize`` ``minimizer`` 使用 ``TerserPlugin``进行压缩bundle
+
+## 自定义插件
+1. ``WactherPlugin`` 根据webpack提供的compiler钩子watchRun回调中获取到compiler对象，对象中获取到监听过程的变更文件属性modifiedFiles，实现获取每次修改保存触发再次打包的时，在终端打印文件变更列表

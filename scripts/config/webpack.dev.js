@@ -1,8 +1,8 @@
 const { merge } = require("webpack-merge");
 const path = require("path");
 const webpack = require("webpack");
-
 const common = require("./webpack.common");
+const WactherPlugin = require("../../plugins/WactherPlugin");
 const { PROJECT_PATH, SERVER_HOST, SERVER_PORT } = require("../constant");
 
 module.exports = merge(common, {
@@ -31,5 +31,6 @@ module.exports = merge(common, {
   plugins: [
     // 实际上只开启 hot：true 就会自动识别有无声明该插件，没有则自动引入，但是怕有隐藏问题这里还是手动加上了
     new webpack.HotModuleReplacementPlugin(),
+    new WactherPlugin(),
   ],
 });
