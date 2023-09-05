@@ -16,6 +16,10 @@ module.exports = merge(common, {
     assetModuleFilename: "images/[name].[contenthash:8].[ext]",
   },
   optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 0,
+    },
     minimize: true,
     minimizer: [
       new TerserPlugin({

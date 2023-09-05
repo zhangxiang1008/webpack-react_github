@@ -22,6 +22,12 @@ module.exports = merge(common, {
     hot: true,
     noInfo: true,
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+      minSize: 0,
+    },
+  },
   plugins: [
     // 实际上只开启 hot：true 就会自动识别有无声明该插件，没有则自动引入，但是怕有隐藏问题这里还是手动加上了
     new webpack.HotModuleReplacementPlugin(),

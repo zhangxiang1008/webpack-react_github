@@ -5,6 +5,7 @@ const { isDevelopment, isProduction } = require("./env");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const WebpackBar = require("webpackbar");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const getCssLoaders = () => {
   const cssLoaders = [
@@ -57,6 +58,7 @@ module.exports = {
         configFile: path.resolve(PROJECT_PATH, "./tsconfig.json"),
       },
     }),
+    new CleanWebpackPlugin(),
     new WebpackBar({
       name: "react-typescript-boilerplate",
       // react 蓝
