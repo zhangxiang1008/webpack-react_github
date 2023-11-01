@@ -45,6 +45,8 @@ const getCssLoaders = () => {
 };
 
 module.exports = {
+  // 为了配合post-css，package.json中添加了browserslist，被webpack识别到了，将默认target设置为了browserslist，在此设置为web
+  target: "web",
   entry: {
     app: path.resolve(PROJECT_PATH, "./src/index.tsx"),
   },
