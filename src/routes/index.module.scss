@@ -10,16 +10,6 @@
     margin-right: 5px;
 }
 
-.memu {
-    :global(.ant-menu) {
-        background-color: red;
-
-        &:where(.css-dev-only-do-not-override-dkbvqv) {
-            border-inline-end: none;
-        }
-    }
-}
-
 
 .right {
     flex: 1;

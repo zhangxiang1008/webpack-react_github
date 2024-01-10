@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppstoreOutlined, MailOutlined } from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Menu } from 'antd'
 import MenuItem from 'antd/es/menu/MenuItem'
 import { Outlet, useNavigate } from 'react-router-dom'
 import styles from './index.module.scss'
+import AliveOutlet from '../components/aliveOutlets/index'
+import { useLocation } from 'react-router-dom'
 
 type MenuItem = Required<MenuProps>['items'][number]
 
@@ -33,20 +35,26 @@ function getItem(
 }
 
 export default function Root() {
+  const location = useLocation()
   let navigate = useNavigate()
-
+  const [selected, setselected] = useState<string[]>()
   const onClick: MenuProps['onClick'] = (e) => {
     navigate({
-      pathname: 'index'
+      pathname: e.key
     })
   }
+  useEffect(() => {
+    const arr = location.pathname.split('/')
+    setselected(arr.splice(arr.length - 1, 1))
+  }, [location])
+
   return (
     <div className={styles.page}>
       <div id="sidebar" className={styles.sidebar}>
         <Menu
-          className={styles.memu}
           onClick={onClick}
           style={{ width: 256 }}
+          selectedKeys={selected}
           mode="inline"
           items={items}
         />
@@ -54,7 +62,8 @@ export default function Root() {
       <div id="detail" className={styles.right}>
         <div className={styles.navbar}></div>
         <div className={styles.content}>
-          <Outlet />
+          {/* <Outlet /> */}
+          <AliveOutlet />
         </div>
       </div>
     </div>
