@@ -1,6 +1,6 @@
 // src/app.tsx
-import React from "react";
-import style from "./index.scss";
+import React from 'react'
+import style from './index.scss'
 // 将数组转化为树
 const list = [
   { id: 4, pid: 3 },
@@ -11,29 +11,29 @@ const list = [
   { id: 6, pid: 3 },
   { id: 7, pid: 2 },
   { id: 9, pid: 2 },
-  { id: 10, pid: 7 },
-];
+  { id: 10, pid: 7 }
+]
 
 function toTree(data: any) {
-  let result: any = [];
-  let obj: any = {};
+  let result: any = []
+  let obj: any = {}
   data.forEach((item: any) => {
     //遍历之前的pid可能已经将此次遍历到的数据id，放入map中，所以在此将obj[item.id]合入item 获得之前的push的children
-    obj[item.id] = Object.assign(item, obj?.[item.id] || {});
+    obj[item.id] = Object.assign(item, obj?.[item.id] || {})
     if (item.pid) {
-      let parent = obj[item.pid] || {};
-      parent.child = parent.child || [];
-      parent.child.push(item);
-      obj[item.pid] = parent;
+      let parent = obj[item.pid] || {}
+      parent.child = parent.child || []
+      parent.child.push(item)
+      obj[item.pid] = parent
     } else {
-      result.push(obj[item.id]);
+      result.push(obj[item.id])
     }
-  });
-  return result;
+  })
+  return result
 }
-console.log(toTree(list));
+// console.log(toTree(list))
 const App: React.FC<any> = () => {
-  return <div className={style.app}>1111331222</div>;
-};
+  return <div className={style.app}>111133111222</div>
+}
 
-export default App;
+export default App
