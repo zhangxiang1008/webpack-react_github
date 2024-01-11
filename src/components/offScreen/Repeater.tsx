@@ -12,13 +12,16 @@ export const Repeater: FC<{
   const resolveRef = useRef<() => void>()
   // methods
   const resolvePromise = () => {
+    console.log('resolvePromise')
     if (resolveRef.current) {
       resolveRef.current()
       resolveRef.current = void 0
     }
   }
-  resolvePromise()
-  useEffect(() => resolvePromise, [])
+  // resolvePromise()
+  useEffect(() => {
+    resolvePromise()
+  }, [])
   if (mode === 'hidden') {
     throw new Promise<void>((resolve) => (resolveRef.current = resolve))
   }
