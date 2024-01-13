@@ -75,7 +75,7 @@ module.exports = {
       utils: path.resolve(PROJECT_PATH, './src/utils')
     },
     //引入文件未写后缀，会依次查找是否存在
-    extensions: ['.tsx', '.ts', '.js', '.json']
+    extensions: ['.tsx', 'jsx', '.ts', '.js', '.json']
   },
   module: {
     rules: [
@@ -84,6 +84,16 @@ module.exports = {
         loader: 'babel-loader',
         options: { cacheDirectory: true },
         exclude: /node_modules/
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
       },
       {
         test: /\.css$/,
