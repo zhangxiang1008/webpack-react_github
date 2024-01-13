@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import ClickListenerHOC from './hoc'
 
-@ClickListenerHOC
+// @ClickListenerHOC
 class Index extends React.Component {
   render() {
     return (
@@ -12,10 +12,11 @@ class Index extends React.Component {
     )
   }
 }
+const HocIndex = ClickListenerHOC(Index)
 export default () => {
   return (
     <div className="box">
-      <Index />
+      <HocIndex />
       <button>组件外部点击</button>
     </div>
   )
