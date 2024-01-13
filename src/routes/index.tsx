@@ -34,14 +34,20 @@ function getItem(
   } as MenuItem
 }
 
+export let lastRouter = ''
+export let currentRouter = ''
+
 export default function Root() {
   const location = useLocation()
   let navigate = useNavigate()
+  currentRouter = location.pathname
   const [selected, setselected] = useState<string[]>()
   const onClick: MenuProps['onClick'] = (e) => {
     navigate({
       pathname: e.key
     })
+    lastRouter = currentRouter
+    currentRouter = e.key
   }
   useEffect(() => {
     const arr = location.pathname.split('/')

@@ -1,23 +1,26 @@
 import { useRef, useEffect, Suspense } from 'react'
 import type { FC, ReactNode } from 'react'
+import { useLocation } from 'react-router-dom'
 import React from 'react'
+import { lastRouter, currentRouter } from 'src/routes/index'
 
 export const Repeater: FC<{
   mode: 'visible' | 'hidden'
   children: ReactNode
 }> = (props) => {
+  const location = useLocation()
   // props
   const { mode, children } = props
   // refs
   const resolveRef = useRef<() => void>()
   // methods
   const resolvePromise = () => {
-    if (resolveRef.current && mode === 'visible') {
+    if (resolveRef.current && mode === 'hidden') {
+      console.log('hidden', lastRouter)
+    } else if (resolveRef.current && mode === 'visible') {
       resolveRef.current()
       resolveRef.current = void 0
-      console.log('Repeter', mode)
-    } else if (resolveRef.current && mode === 'hidden') {
-      console.log('Repeter', mode)
+      console.log('show', location.pathname)
     }
   }
   resolvePromise()

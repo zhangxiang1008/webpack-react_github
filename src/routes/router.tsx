@@ -1,10 +1,11 @@
 import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { createHashRouter } from 'react-router-dom'
 import Root from './index'
 import ErrorPage from './errorPage'
 import IndexPage from '../pages/index'
 import HocPage from '../pages/hocPage/index'
-export const router = createBrowserRouter([
+
+export const router = createHashRouter([
   {
     path: '',
     element: <Root />,
