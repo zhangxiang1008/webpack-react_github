@@ -119,6 +119,42 @@ let Todo = (function Factory() {
 const todo1 = Todo({ id: 1 })
 const todo2 = Todo({ id: 2 })
 console.log(todo1.toString(), todo2.toString())
+// 手写apply 功能：绑定函数的this 且第二个参数为数组
+// @ts-ignore
+Function.prototype.myApply = function (context: any, params?: any[]) {
+  context = context || window
+  // 使用Symbol保持唯一
+  const fnKey = Symbol()
+  context[fnKey] = this
+  let res = context[fnKey](...params)
+  delete context.fn
+  return res
+}
+function greet(name?: string) {
+  console.log(`Hello, ${name || this.name}!`)
+}
+
+// 手写call 功能：绑定函数this 且第二个参数为rest
+// @ts-ignore
+Function.prototype.myCall = function (context, ...args) {
+  return this.myApply(context, args)
+}
+const person = {
+  name: 'John'
+}
+greet.apply(person)
+greet.apply(person, ['Alice']) // 输出：Hello, Alice!
+greet.call(person, 'Alice call') // 输出：Hello, Alice!
+
+Function.prototype.bind = function (context, ...args) {
+  const fn = this // 原始函数
+  return function (...innerArgs) {
+    return fn.apply(context, [...args, ...innerArgs]) // 使用apply函数调用原始函数，并传递所有参数
+  }
+}
+const greetPerson = greet.bind(person)
+greetPerson() // 输出：Hello, Alice!
+greetPerson('bob')
 // @ts-ignore
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
