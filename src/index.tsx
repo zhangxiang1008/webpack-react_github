@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './routes/router'
+import { event1 } from './demo/eventCycle'
 interface Item {
   key: string
   label: string
@@ -86,7 +87,6 @@ s1.getName()
 s2.getName()
 
 // 自增函数
-
 let autoIncrement = (start: number, increment: number) => {
   return function () {
     start += increment
@@ -146,15 +146,27 @@ greet.apply(person)
 greet.apply(person, ['Alice']) // 输出：Hello, Alice!
 greet.call(person, 'Alice call') // 输出：Hello, Alice!
 
-Function.prototype.bind = function (context, ...args) {
-  const fn = this // 原始函数
-  return function (...innerArgs) {
-    return fn.apply(context, [...args, ...innerArgs]) // 使用apply函数调用原始函数，并传递所有参数
-  }
-}
 const greetPerson = greet.bind(person)
 greetPerson() // 输出：Hello, Alice!
 greetPerson('bob')
+event1()
+//@ts-ignore
+Function.prototype.myBind = function (context, ...args) {
+  if (typeof this !== 'function') {
+    throw Error('caller is not a function')
+  }
+  const _context = context || globalThis
+
+  const _this = this
+
+  return function fn(...innerArgs: any) {
+    if (_this instanceof fn) {
+      return new _this(...args, ...innerArgs)
+    } else {
+      return _this.apply(_context, args.concat(innerArgs))
+    }
+  }
+}
 // @ts-ignore
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
