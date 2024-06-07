@@ -122,11 +122,11 @@ Function.prototype.myApply = function (context: any, params?: any[]) {
   // 使用Symbol保持唯一
   const fnKey = Symbol();
   context[fnKey] = this;
-  let res = context[fnKey](...params);
+  let res = context[fnKey](...(params || []));
   delete context.fn;
   return res;
 };
-function greet(name?: string) {
+function greet(this: any, name?: string) {
   console.log(`Hello, ${name || this.name}!`);
 }
 
