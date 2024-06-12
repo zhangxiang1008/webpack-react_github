@@ -37,8 +37,8 @@
     .inner{
         width: 100%;
         display: inline-block;
-        // writing-mode: horizontal-tb;
-        // text-align: center;
+        writing-mode: horizontal-tb;
+        text-align: center;
         background-color: aquamarine;
         .content{
             display: inline-block;
