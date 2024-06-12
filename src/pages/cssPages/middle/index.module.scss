@@ -1,0 +1,48 @@
+.outer1{
+    height: 100px;
+    width: 100px;
+    background-color: aqua;
+    position: relative;
+    .inner{
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        background-color: aquamarine;
+    }
+}
+
+.outer2{
+    margin-top: 20px;
+    line-height: 100px;
+    width: 100px;
+    text-align: center;
+    background-color: aqua;
+    .inner{
+        display: inline-block;
+        line-height: initial;
+        vertical-align: middle;
+        background-color: aquamarine;
+    }
+}
+.outer3{
+    margin-top: 20px;
+    width: 100px; 
+    height: 100px;
+    writing-mode:vertical-lr;
+    text-align: center;
+    background-color: aqua;
+    .inner{
+        width: 100%;
+        display: inline-block;
+        // writing-mode: horizontal-tb;
+        // text-align: center;
+        background-color: aquamarine;
+        .content{
+            display: inline-block;
+            background-color: red;
+        }
+    }
+}
