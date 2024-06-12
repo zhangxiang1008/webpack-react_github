@@ -4,6 +4,7 @@ import Root from './index'
 import ErrorPage from './errorPage'
 import IndexPage from '../pages/index'
 import HocPage from '../pages/hocPage/index'
+import ThreeCol from '../pages/cssPages/threeColumns'
 
 export const router = createHashRouter([
   {
@@ -16,7 +17,8 @@ export const router = createHashRouter([
         element: <div>homepage</div>
       },
       { path: '/index', element: <IndexPage /> },
-      { path: '/index2', element: <HocPage /> }
+      { path: '/index2', element: <HocPage /> },
+      { path: '/threeCol', element: <ThreeCol /> }
     ]
   }
 ])

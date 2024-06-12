@@ -13,7 +13,8 @@ type MenuItem = Required<MenuProps>['items'][number]
 const items: MenuProps['items'] = [
   getItem('Navigation One', '', <MailOutlined rev={undefined} />, [
     getItem('Option 1', 'index'),
-    getItem('Option 2', 'index2')
+    getItem('双列布局', 'index2'),
+    getItem('三列布局', 'threeCol')
   ]),
   getItem('Navigation Two', 'sub2', <AppstoreOutlined rev={undefined} />)
 ]
@@ -68,7 +69,6 @@ export default function Root() {
       <div id="detail" className={styles.right}>
         <div className={styles.navbar}></div>
         <div className={styles.content}>
-          {/* <Outlet /> */}
           <AliveOutlet />
         </div>
       </div>
