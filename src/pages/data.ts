@@ -1,7 +1,6 @@
 // 注意：你进行数据获取的方式取决于
 // 你与 Suspense 集成的框架。
 // 通常，缓存逻辑会在框架内部。
-
 let cache = new Map()
 
 export function fetchData(url: string) {
