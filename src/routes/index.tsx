@@ -53,7 +53,7 @@ export default function Root() {
     currentRouter = e.key;
   };
   useEffect(() => {
-    fpsWatcher();
+    // fpsWatcher();
   }, []);
 
   useEffect(() => {
