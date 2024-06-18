@@ -3,6 +3,7 @@ export async function event1() {
     console.log("async1 start");
     await async2();
     console.log("async1 end"); // 争议点
+    console.log("async1 end22"); // 争议点
   }
   async function async2() {
     console.log("async2");

@@ -10,7 +10,6 @@ import { useLocation } from "react-router-dom";
 import fpsWatcher from "../utils/fpsWatcher";
 
 type MenuItem = Required<MenuProps>["items"][number];
-
 const items: MenuProps["items"] = [
   getItem("Navigation One", "", <MailOutlined rev={undefined} />, [
     getItem("双列布局", "index"),
