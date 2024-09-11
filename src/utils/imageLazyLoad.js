@@ -7,32 +7,52 @@
 }
 
 function lazyLoadImages() {
-  const images = document.querySelectorAll(".lazy") || [];
-  const windowHeight = window.innerHeight;
-  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  console.log("🚀======lazyLoadImages", windowHeight, scrollTop);
+  const images = document.querySelectorAll('.lazy') || []
+  const windowHeight = window.innerHeight
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  console.log('🚀======lazyLoadImages', windowHeight, scrollTop)
   images.forEach((image) => {
-    const imageTop = image.getBoundingClientRect().top;
+    const imageTop = image.getBoundingClientRect().top
     if (imageTop < windowHeight + scrollTop) {
       //在可视区域内
-      const src = image.dataset.src;
+      const src = image.dataset.src
       if (src) {
-        image.src = src;
-        image.classList.remove("lazy");
-        image.classList.add("loaded");
+        image.src = src
+        image.classList.remove('lazy')
+        image.classList.add('loaded')
       }
     }
-  });
+  })
   // 如果所有图片都已加载，可以考虑移除滚动监听器
-  if (!images.some?.((img) => img.className.includes("lazy"))) {
-    window.removeEventListener("scroll", lazyLoadImages);
-    window.removeEventListener("resize", lazyLoadImages);
+  if (!images.some?.((img) => img.className.includes('lazy'))) {
+    window.removeEventListener('scroll', lazyLoadImages)
+    window.removeEventListener('resize', lazyLoadImages)
   }
 }
 
+function lazyLoadImages2() {
+  const intersectionObserver = new IntersectionObserver((entries) => {
+    // 如果 intersectionRatio 为 0，则目标在视野外，
+    if (entries[0].intersectionRatio <= 0) return
+    for (let i of entries) {
+      if (i.isIntersecting) {
+        let img = i.target
+        let trueSrc = img.getAttribute('data-src')
+        img.setAttribute('src', trueSrc)
+        observer.unobserve(img)
+      }
+    }
+    console.log('Loaded new items')
+  })
+  const images = document.querySelectorAll('.lazy') || []
+  images.forEach((image) => {
+    intersectionObserver(image)
+  })
+}
+
 // 初始化时检查可视区域内的图片
-lazyLoadImages();
+lazyLoadImages()
 
 // 监听滚动和窗口大小变化事件
-window.addEventListener("scroll", lazyLoadImages);
-window.addEventListener("resize", lazyLoadImages);
+window.addEventListener('scroll', lazyLoadImages)
+window.addEventListener('resize', lazyLoadImages)
