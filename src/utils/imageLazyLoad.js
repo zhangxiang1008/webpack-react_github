@@ -33,7 +33,6 @@ function lazyLoadImages() {
 function lazyLoadImages2() {
   const intersectionObserver = new IntersectionObserver((entries) => {
     // 如果 intersectionRatio 为 0，则目标在视野外，
-    if (entries[0].intersectionRatio <= 0) return
     for (let i of entries) {
       if (i.isIntersecting) {
         let img = i.target
