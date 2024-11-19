@@ -44,9 +44,7 @@ function lazyLoadImages2() {
     console.log('Loaded new items')
   })
   const images = document.querySelectorAll('.lazy') || []
-  images.forEach((image) => {
-    intersectionObserver(image)
-  })
+  intersectionObserver(images)
 }
 
 // 初始化时检查可视区域内的图片
