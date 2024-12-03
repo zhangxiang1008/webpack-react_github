@@ -85,3 +85,39 @@ export function newOperator(func:Function, ...args: any[]){
     let result = func.apply(obj,args);
     return (result instanceof Object) ? result : obj
 }
+
+type ResultTypeFunctionArgs<T> = T extends (x: infer U,...args:any[]) => any ? U : T
+
+type fa = ResultTypeFunctionArgs<(x:number,y:string)=>void>
+
+type PromiseType<T> = T extends Promise<infer U> ? U : T
+
+type pt = PromiseType<PromiseType<String>>
+
+type ArrayType<T> = T extends (infer U)[] ? U:T
+
+type at = ArrayType<[number,string][]>
+
+function AutoSetterAndGetter<T>(constructor: Function){
+    const proto = constructor.prototype
+    const keys = Object.getOwnPropertyNames(constructor.prototype).filter(key=>key !== 'constructor')
+
+    keys.forEach(key=>{
+        const setterName = `set${key[0].toUpperCase()}${key.slice(1)}`
+        proto[setterName] = function(value:any) {
+            this[key] = value
+        }
+    })
+}
+
+@AutoSetterAndGetter
+class Person{
+    name: string
+    age: number
+    constructor(name: string,age:number){
+        this.name = name
+        this.age = age
+    }
+}
+
+const p1 = new Person("1",1)
