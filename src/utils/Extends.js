@@ -58,3 +58,16 @@ function SubObject() {
   this.subProperty = false
 }
 interAliveExtends(SuperObject, SubObject)
+const sub1 =  new SubObject();
+console.log(sub1.property)
+
+// 默写寄生 继承
+//获取到父类原型上所有的方法属性
+function internalActiveExtends(Super,Sub){
+  function F(){}
+  F.prototype = Super.prototype
+  const f = new F()
+  Sub.prototype = f;
+  Sub.prototype.constructor = Sub
+}
+// 构造函数中的属性赋值
