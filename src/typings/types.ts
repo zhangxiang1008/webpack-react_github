@@ -8,6 +8,8 @@ interface Fish {
     c: string
 }
 
+type FishPreview = Omit<Fish,"c">
+
 function getSmallPet(): Fish | Bird {
     return {
         a: "1",
@@ -121,3 +123,5 @@ class Person{
 }
 
 const p1 = new Person("1",1)
+
+
