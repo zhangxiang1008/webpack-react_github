@@ -44,13 +44,36 @@ function debounce(func, delay, immediate = false) {
     }
   };
 }
+function debounce2(fn, delay = 1000, leading = false) {
+  let timer = null;
+  let isInvocked = false;
+  return function (...args) {
+    const _this = this;
+    if (leading && !isInvocked) {
+      fn.call(_this, args);
+      isInvocked = true;
+    } else {
+      if (timer) {
+        clearTimeout(timer);
+      } else {
+        timer = setTimeout(() => {
+          if (!leading || isInvocked) {
+            fn.call(_this, args);
+            timer = null;
+            isInvocked = false;
+          }
+        }, delay);
+      }
+    }
+  };
+}
 // 示例使用
 function logMessage(type) {
   console.log("Logging..." + type, Date.now());
 }
 
 const throttledLog = throttle(logMessage, 1000); // 创建一个节流后的logMessage函数，限制每1000毫秒执行一次
-const debounceLog = debounce(logMessage, 1000);
+const debounceLog = debounce2(logMessage, 1000, true);
 
 // 即使连续快速调用，logMessage也只会按照限制的频率执行
 let timer = setInterval(() => {
