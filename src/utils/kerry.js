@@ -15,6 +15,7 @@ function curry(fn) {
   function curried() {
     // 新函数调用时会继续传参
     const restArgs = [].slice.call(arguments);
+    console.log("restArgs", restArgs);
     const allArgs = [...presetArgs, ...restArgs];
     return curry.call(null, fn, ...allArgs);
   }
@@ -26,7 +27,7 @@ function curry(fn) {
 }
 
 const curryAdd = curry(dynamicAdd);
-console.log(curryAdd(1, 2)(3));
+console.log(curryAdd(1, 2)(3).toString());
 // console.log(curryAdd(1, 2)(3).toString());
 // const curryAdd2 = curry(staticAdd);
 // console.log(curryAdd2(1)(3).toString());
