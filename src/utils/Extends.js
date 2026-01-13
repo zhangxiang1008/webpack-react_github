@@ -28,6 +28,7 @@ function SubObject() {
 // 缺点： 无法获取父类的方法，需要自定义方法
 
 // ======================3、混合继承===================
+// 用构造函数获取属性 单独利用原型获取父类的方法
 function SubObject() {
   SuperObject.call(this);
   this.subProperty = false;
@@ -38,28 +39,7 @@ SubObject.prototype.constructor = SubObject;
 SubObject.prototype.getSubValue = function () {
   return this.subProperty;
 };
-// 缺点：
-
-// ================4、寄生式组合继承============
-// 使用原型 获取父类函数方法
-function getFnByProto(target) {
-  function F() {}
-  F.prototype = target;
-  return new F();
-}
-function interAliveExtends(SuperObj, SubObj) {
-  const protoType = getFnByProto(SuperObj.protoType);
-  protoType.constructor = SubObj;
-  SubObj.protoType = protoType;
-}
-// 调用父类构造函数获取
-function SubObject() {
-  SuperObject.call(this);
-  this.subProperty = false;
-}
-interAliveExtends(SuperObject, SubObject);
-const sub1 = new SubObject();
-console.log(sub1.property);
+// 缺点：要调用两次SuperObject函数
 
 // ================== 简化版的寄生组合继承==================
 /**

@@ -37,23 +37,3 @@ function fpsWatcher2(){
 
   window.requestAnimationFrame(loop)
 }
-
-function binarySearch(arr,target){
-  if(arr.length <= 1 && arr[0] !== target) return -1
-
-  let right = arr.length - 1
-  let left = 0
-  while(left <= right){
-    let middle = Math.floor((right + left) / 2)
-    if(target < arr[middle]){
-      right = middle - 1
-    }else if(target > arr[middle]){
-      left = middle + 1;
-    }else{
-      return middle
-    }
-  }
-  return -1
-}
-
-console.log(binarySearch([],4))

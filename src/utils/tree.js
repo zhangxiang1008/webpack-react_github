@@ -151,3 +151,35 @@ function toTree(data) {
   });
   return result;
 }
+
+// 递归使数组变成树
+function buildTree(data=[],pid = null){
+  const currentLevelDatas = data.filter(item=>item.pid === pid)
+  currentLevelDatas.forEach(item=>{
+    const children = buildTree(data,item.id)
+    item.children = children
+  })
+  return currentLevelDatas.sort((a,b)=>a.id - b.id)
+}
+
+// 循环使数组变成树
+function buildTree2(data=[],pid = null){
+  const map = {}
+  const res = []
+  data.forEach(node=>{
+    map[node.id] = Object.assign(node, map[node.id] || {})
+    if(node.pid){
+      const parent = map[node.pid] || {}
+      parent.children = parent.children || []
+      parent.children.push(node)
+      map[node.pid] = parent
+    }else{
+      res.push(map[node.id])
+    }
+  })
+  // console.log(data)
+ return res
+}
+// console.log(JSON.stringify(buildTree(list)))
+console.log("=====")
+console.log(JSON.stringify(buildTree2(list)))

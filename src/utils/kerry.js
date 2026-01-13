@@ -17,11 +17,11 @@ function curry(fn) {
     const restArgs = [].slice.call(arguments);
     console.log("restArgs", restArgs);
     const allArgs = [...presetArgs, ...restArgs];
-    return curry.call(null, fn, ...allArgs);
+    return curry.call(this, fn, ...allArgs);
   }
   // 重写toString
   curried.toString = function () {
-    return fn.apply(null, presetArgs);
+    return fn.apply(this, presetArgs);
   };
   return curried;
 }
