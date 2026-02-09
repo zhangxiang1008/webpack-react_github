@@ -26,7 +26,7 @@ function curry(fn) {
   return curried;
 }
 
-const curryAdd = curry(dynamicAdd);
+const curryAdd = curry(dynamicAdd,1);
 console.log(curryAdd(1, 2)(3).toString());
 // console.log(curryAdd(1, 2)(3).toString());
 // const curryAdd2 = curry(staticAdd);

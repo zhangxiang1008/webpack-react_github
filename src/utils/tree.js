@@ -121,6 +121,35 @@ function TreeSearch(root, target) {
 }
 console.log("TreeSearch", TreeSearch(root, 5));
 
+function jcIteration(root) {
+  const stack = [root];
+  const res = []
+  let isLeftOrder = true;
+  while (stack.length > 0) {
+    let size = stack.length;
+    let levelList = []
+    for (let index = 0; index < size; index++) {
+      const currentNode = stack.shift();
+      if (isLeftOrder) {
+        levelList.push(currentNode.val)
+      } else{
+        levelList.unshift(currentNode.val)
+      }
+      if(currentNode.left){
+        stack.push(currentNode.left)
+      }
+      if(currentNode.right){
+        stack.push(currentNode.right)
+      }
+    }
+    res.push(levelList)
+    isLeftOrder = !isLeftOrder
+  }
+  return res
+}
+console.log(jcIteration(root))
+console.log("===========分割线==========");
+
 // 将数组转化为树
 const list = [
   { id: 4, pid: 3 },
@@ -153,33 +182,33 @@ function toTree(data) {
 }
 
 // 递归使数组变成树
-function buildTree(data=[],pid = null){
-  const currentLevelDatas = data.filter(item=>item.pid === pid)
-  currentLevelDatas.forEach(item=>{
-    const children = buildTree(data,item.id)
-    item.children = children
-  })
-  return currentLevelDatas.sort((a,b)=>a.id - b.id)
+function buildTree(data = [], pid = null) {
+  const currentLevelDatas = data.filter((item) => item.pid === pid);
+  currentLevelDatas.forEach((item) => {
+    const children = buildTree(data, item.id);
+    item.children = children;
+  });
+  return currentLevelDatas.sort((a, b) => a.id - b.id);
 }
 
 // 循环使数组变成树
-function buildTree2(data=[],pid = null){
-  const map = {}
-  const res = []
-  data.forEach(node=>{
-    map[node.id] = Object.assign(node, map[node.id] || {})
-    if(node.pid){
-      const parent = map[node.pid] || {}
-      parent.children = parent.children || []
-      parent.children.push(node)
-      map[node.pid] = parent
-    }else{
-      res.push(map[node.id])
+function buildTree2(data = [], pid = null) {
+  const map = {};
+  const res = [];
+  data.forEach((node) => {
+    map[node.id] = Object.assign(node, map[node.id] || {});
+    if (node.pid) {
+      const parent = map[node.pid] || {};
+      parent.children = parent.children || [];
+      parent.children.push(node);
+      map[node.pid] = parent;
+    } else {
+      res.push(map[node.id]);
     }
-  })
+  });
   // console.log(data)
- return res
+  return res;
 }
 // console.log(JSON.stringify(buildTree(list)))
-console.log("=====")
-console.log(JSON.stringify(buildTree2(list)))
+console.log("=====");
+console.log(JSON.stringify(buildTree2(list)));

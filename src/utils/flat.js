@@ -64,13 +64,33 @@ function test(arr, depth = Infinity) {
   return res;
 }
 
+function flat(arr = [], depth = 1) {
+  if (depth > 0) {
+    // 以下代码还可以简化，不过为了可读性，还是....
+    return arr.reduce((pre, cur, array) => {
+      return pre.concat(Array.isArray(cur) ? flat(cur, depth - 1) : cur);
+    }, []);
+  }
+  return arr.slice();
+}
+
 // 测试
 const deepNested = [
   [0, 1],
   [2, [3, [4, 5]]],
 ];
 
-console.log(test(deepNested, 2)); // 处理深度嵌套数组
-console.log(test(deepNested, 1)); // 处理深度嵌套数组
-console.log(test(deepNested)); // 处理深度嵌套数组
+// console.log(test(deepNested, 2)); // 处理深度嵌套数组
+// console.log(test(deepNested, 1)); // 处理深度嵌套数组
+// console.log(test(deepNested)); // 处理深度嵌套数组
 
+console.log(flat(deepNested, 5));
+
+function flat(arr = [], depth = 1) {
+  if (depth > 0) {
+    return arr.reduce((pre, cur, array) => {
+      return pre.concat(Array.isArray(cur) ? flat(cur, depth - 1) : cur);
+    }, []);
+  }
+  return arr.slice();
+}

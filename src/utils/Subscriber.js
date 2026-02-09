@@ -66,3 +66,5 @@ eventbus.publish("eat", "shit");
 
 const key = Buffer.from("mysecretkey", "utf8");
 console.log(key);
+
+export {Subscriber}

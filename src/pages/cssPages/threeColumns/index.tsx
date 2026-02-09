@@ -31,6 +31,15 @@ const Index: React.FC<any> = () => {
         <div className={styles.main}>grid布局</div>
         <div className={styles.right}></div>
       </div>
+      <div className={styles.flexDiv}>
+        <div className={styles.flexDivtag}></div>
+        <div className={styles.flexDivtag}></div>
+        <div className={styles.flexDivtag}></div>
+        <div className={styles.flexDivtag}></div>
+        <div className={styles.flexDivtag}></div>
+        <div className={styles.flexDivtag}></div>
+
+      </div>
     </div>
   );
 };

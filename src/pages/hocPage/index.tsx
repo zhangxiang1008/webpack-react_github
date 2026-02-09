@@ -8,6 +8,7 @@ class Index extends React.Component {
       <div className="index">
         <p>hello，world</p>
         <button>组件内部点击</button>
+        <button className='button222'>组件内部点击22</button>
       </div>
     )
   }
